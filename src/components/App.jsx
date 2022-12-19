@@ -13,30 +13,16 @@ export class App extends Component{
     bad: 0
   }
 
-
-
   incrementValue = (e) => {
+
+    const {name} = e.target;
+
     e.preventDefault()
-
-    console.log(e.target.name);
-
-    if (e.target.name === 'good'){
       this.setState(prevState => {
-        return { good: prevState.good + 1 };
+        return { [name] : prevState[name] + 1 };
       });
-    }
     
-    if (e.target.name === 'neutral'){
-      this.setState(prevState => {
-        return { neutral: prevState.neutral + 1 };
-      });
-    }
 
-    if (e.target.name === 'bad'){
-      this.setState(prevState => {
-        return { bad: prevState.bad + 1 };
-      });
-    }
   }
     
   countTotalFeedback = () => {
