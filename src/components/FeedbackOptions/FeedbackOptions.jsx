@@ -1,16 +1,31 @@
+import PropTypes from 'prop-types';
+
 import { Component } from "react";
 import css from './FeedbackOptions.module.css';
 
 
 export class FeedbackOptions extends Component {
 
+        render(){
+         const { options } = this.props; 
+             return (
 
-    render(){
-    return(
-        <div className={css.buttonGroup}>
-    <button className = {css.button} type="submit" name="good" onClick={ (e) => this.props.options(e) }> Good </button>
-    <button className = {css.button} type="submit" name="neutral" onClick={ (e) => this.props.options(e) }> Neutral </button>
-    <button className = {css.button} type="submit" name="bad" onClick={ (e) => this.props.options(e) }> Bad </button>
-        </div>
-    )}
+             <div className={css.buttonGroup}>
+              {options.map(el => {
+                return (
+                  <button className = {css.button} type="submit" key={el} onClick={() => this.props.onLeaveFeedback(el)}>
+                    {el}
+                  </button>
+                );
+              })}
+            </div>
+        );
+      };
 }
+
+
+
+FeedbackOptions.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    onLeaveFeedback: PropTypes.func.isRequired,
+  };

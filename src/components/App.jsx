@@ -15,11 +15,8 @@ export class App extends Component{
 
   incrementValue = (e) => {
 
-    const {name} = e.target;
-
-    e.preventDefault()
       this.setState(prevState => {
-        return { [name] : prevState[name] + 1 };
+        return { [e] : prevState[e] + 1 };
       });
     
 
@@ -43,7 +40,8 @@ export class App extends Component{
     return (
       <Section title="Please leave your feedback:">
       <FeedbackOptions 
-        options={this.incrementValue} />
+        options={Object.keys(this.state)}
+        onLeaveFeedback={this.incrementValue}/>
       
       {this.countTotalFeedback() 
         ?  ( <Statistic 
@@ -61,6 +59,4 @@ export class App extends Component{
       </Section>
     )
   }
-
-
 }
